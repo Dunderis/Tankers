@@ -60,5 +60,11 @@ public class Player : MonoBehaviour
         {
             health.TakeDamage(Bullet.damage);
         }
+        if(other.gameObject.CompareTag("Health"))
+        {
+            //negative damage = healing
+            if(health.TakeDamage(-10))
+                Destroy(other.gameObject);
+        }
     }
 }

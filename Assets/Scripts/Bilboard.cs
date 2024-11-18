@@ -13,6 +13,6 @@ public class Bilboard : MonoBehaviour
 
     void Update()
     {
-        transform.LookAt(target);
+        transform.LookAt(-target.position);
     }
 }

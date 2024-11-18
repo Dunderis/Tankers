@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
+    public GameObject explosionPrefab;
     public static int damage = 10;
     public float speed = 15f;
     public float lifeTime = 2f;
 
     void Start()
     {
-        Destroy(gameObject, lifeTime);
+        Invoke("SelfDestruct", lifeTime);
     }
 
     void Update()
@@ -20,7 +21,12 @@ public class Bullet : MonoBehaviour
 
     private void OnCollisionEnter(Collision other) 
     {
-        //todo: explosion
+        SelfDestruct();
+    }
+
+    void SelfDestruct()
+    {
+        Instantiate(explosionPrefab, transform.position, Quaternion.identity);
         Destroy(gameObject);
     }
 }

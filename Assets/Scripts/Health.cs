@@ -15,15 +15,24 @@ public class Health : MonoBehaviour
         currentHealth = maxHealth;
     }
 
-    public void TakeDamage(int damage)
+    public bool TakeDamage(int damage)
     {
+        if(damage < 0 && currentHealth == maxHealth)
+        {
+            return false; //didn't heal, because health is already full
+        }
+
         currentHealth -= damage;
         currentHealth = Mathf.Max(0, currentHealth);
+       //currentHealth = currentHealth < 0 ? 0 : currentHealth;
+
         bar.transform.localScale = new Vector3((float)currentHealth / maxHealth, 1, 1);
 
         if(currentHealth == 0)
         {
             onDeath.Invoke();
         }
+
+        return true;
     }
 }
