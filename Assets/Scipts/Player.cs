@@ -12,6 +12,9 @@ public class Player : MonoBehaviour
     public Transform bulletSpawn;
     public float fireRate = 0.5f;
 
+    [Header("Health")]
+    public Health health;
+
 
     void Start()
     {
@@ -42,5 +45,16 @@ public class Player : MonoBehaviour
 
         if(input != Vector3.zero)
             transform.forward = input;
+    }
+
+
+    private void OnCollisionEnter(Collision other) 
+    {
+        if(other.gameObject.CompareTag("Health"))
+        {
+            //negative damage = healing
+            health.TakeDamage(-10);
+            Destroy(other.gameObject);
+        }
     }
 }
