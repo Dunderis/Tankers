@@ -14,10 +14,15 @@ public class Player : MonoBehaviour
     public Transform bulletSpawn;
     public float fireRate = 0.5f;
 
+    [Header("Sound")]
+    public float onVolume = 0.5f;
+    public float offVolume = 0.0f;
 
+    private AudioSource audioSource;
 
     void Start()
     {
+        audioSource = GetComponent<AudioSource>();
         InvokeRepeating("Shoot", 0.0f, fireRate);
     }
 
@@ -45,6 +50,13 @@ public class Player : MonoBehaviour
         transform.position += input * speed * Time.deltaTime;
 
         if (input != Vector3.zero)
+        {
             transform.forward = input;
+            audioSource.volume = onVolume;
+        }  
+        else
+        {
+            audioSource.volume = offVolume;
+        }
     }
 }
