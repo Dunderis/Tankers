@@ -21,6 +21,12 @@ public class Bullet : MonoBehaviour
     {
         //todo: explosion effect
         //todo: damage enemy
+        var health = collision.gameObject.GetComponent<Health>();
+        if (health != null)
+        {
+            health.TakeDamage(10);
+        }
+        
         Destroy(gameObject);
     }
 }
