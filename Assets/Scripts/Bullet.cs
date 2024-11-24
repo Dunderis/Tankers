@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Bullet : MonoBehaviour
 {
@@ -26,8 +28,9 @@ public class Bullet : MonoBehaviour
         if (health != null)
         {
             health.TakeDamage(10);
+            health.LoadEnd();
         }
-
+        
         SelfDestruct();
     }   
 
@@ -36,4 +39,5 @@ public class Bullet : MonoBehaviour
         Instantiate(explosionPrefab, transform.position, transform.rotation);
         Destroy(gameObject);
     }
+    
 }

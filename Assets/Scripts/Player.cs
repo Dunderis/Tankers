@@ -15,6 +15,13 @@ public class Player : MonoBehaviour
     public float fireRate = 0.5f;
 
 
+    public AudioClip bulletSound;
+    public AudioClip Drive;
+    
+
+
+    private AudioSource audioSource;
+
     private void Start() 
     {
         InvokeRepeating("Shoot", 0, fireRate);
@@ -23,6 +30,7 @@ public class Player : MonoBehaviour
     private void Shoot()
     {
         Instantiate(bulletPrefab, bulletSpawn.position, transform.rotation);
+        audioSource.PlayOneShot(bulletSound);
     }
 
     void Update()
@@ -33,11 +41,13 @@ public class Player : MonoBehaviour
         {
             input.x = Input.GetAxis("HorizontalKeys");
             input.z = Input.GetAxis("VerticalKeys");
+            audioSource.PlayOneShot(Drive);
         }
         else
         {
             input.x = Input.GetAxis("HorizontalArrows");
             input.z = Input.GetAxis("VerticalArrows");
+            audioSource.PlayOneShot(Drive);
         }
         
 
